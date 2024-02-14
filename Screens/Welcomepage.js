@@ -12,12 +12,17 @@ const Welcomepage = ({ navigation }) => {
   const [name, setName] = useState('');
 
   const handleSignUp = () => {
+    if (!email) {
+      Alert.alert('Error', 'Please enter your email address.');
+      return;
+  }
     axios.post('https://api-coolbro.gvmtechnologies.com/auth/register/', {
       Name: name,
       Email: email,
       Login_type: 0,
       Role: 'User'
     })
+   
       .then(response => {
         console.log('response', response);
         if (response.status === 200) {
